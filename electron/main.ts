@@ -1,6 +1,6 @@
 import { app, BrowserWindow } from 'electron';
-import * as isDev from 'electron-is-dev';
 import installExtension, { REACT_DEVELOPER_TOOLS, REDUX_DEVTOOLS } from "electron-devtools-installer";
+import * as isDev from 'electron-is-dev';
 
 let win: BrowserWindow | null = null;
 
@@ -9,7 +9,8 @@ function createWindow() {
         width: 1200,
         height: 900,
         webPreferences: {
-            nodeIntegration: true
+            nodeIntegration: true,
+            devTools: isDev,
         }
     })
 
