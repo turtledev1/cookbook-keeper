@@ -1,11 +1,21 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
+import { HashRouter } from 'react-router-dom';
+import { App } from './app';
+import { ErrorBoundary } from './components/error-boundary/error-boundary.component';
 import './index.css';
-import App from './App';
 import * as serviceWorker from './serviceWorker';
+import { store } from './store/store';
 
 ReactDOM.render(
-    <App />,
+    <ErrorBoundary>
+        <Provider store={store}>
+            <HashRouter>
+                <App />
+            </HashRouter>
+        </Provider>
+    </ErrorBoundary>,
     document.getElementById('root')
 );
 

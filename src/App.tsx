@@ -1,26 +1,16 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Redirect, Route, Switch } from 'react-router';
+import { Dashboard } from './components/dashboard/dashboard.component';
+import { Recipes } from './components/recipes/recipes.component';
 
-const App: React.FC = () => {
+export const App: React.FC = () => {
     return (
-        <div className="App">
-            <header className="App-header">
-                <img src={logo} className="App-logo" alt="logo" />
-                <p>
-                    Edit <code>src/App.tsx</code> and save to reload.
-                </p>
-                <a
-                    className="App-link"
-                    href="https://reactjs.org"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    Learn React lol
-                </a>
-            </header>
-        </div>
+        <Switch>
+            <Route path="/" component={Dashboard} />
+            <Route path="/recipes" component={Recipes} />
+            <Route data-test-id="redirect-route" path="*">
+                <Redirect to="/" />
+            </Route>
+        </Switch>
     );
 }
-
-export default App;

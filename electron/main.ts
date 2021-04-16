@@ -14,6 +14,11 @@ function createWindow() {
     })
 
     if (isDev) {
+        // DevTools
+        installExtension([REDUX_DEVTOOLS, REACT_DEVELOPER_TOOLS])
+            .then((name) => console.log(`Added Extension:  ${name}`))
+            .catch((err) => console.log('An error occurred: ', err));
+
         win.loadURL('http://localhost:3000/index.html');
     } else {
         // 'build/index.html'
@@ -23,13 +28,6 @@ function createWindow() {
     win.on('closed', () => {
         win = null;
     });
-
-    if (isDev) {
-        // DevTools
-        installExtension([REDUX_DEVTOOLS, REACT_DEVELOPER_TOOLS])
-            .then((name) => console.log(`Added Extension:  ${name}`))
-            .catch((err) => console.log('An error occurred: ', err));
-    }
 }
 
 app.on('ready', createWindow);
