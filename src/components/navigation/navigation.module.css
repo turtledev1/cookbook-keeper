@@ -1,0 +1,10 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 100px;
+  background-color: green;
+}
+
+.container.expanded {
+  width: 300px;
+}

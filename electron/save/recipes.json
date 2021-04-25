@@ -1,0 +1,28 @@
+[
+    {
+        "title": "Première recette",
+        "ingredients": ["1/2 tasse de truc", "Lots of other things"],
+        "steps": ["Coupe toute", "Cuit toute"],
+        "prepTime": 0.5,
+        "cookTime": 1,
+        "labels": [
+            {
+                "text": "végé",
+                "color": "#000000"
+            }
+        ]
+    },
+    {
+        "title": "Deuxième recette",
+        "ingredients": ["1/2 tasse de truc", "Lots of other things"],
+        "steps": ["Coupe toute", "Cuit toute"],
+        "prepTime": 0.5,
+        "cookTime": 1,
+        "labels": [
+            {
+                "text": "végé",
+                "color": "#000000"
+            }
+        ]
+    }
+]
