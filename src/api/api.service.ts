@@ -1,23 +1,22 @@
-import { IpcRequest } from '../model/ipc/ipc-request';
+import { Channel, ChannelResponse } from '../shared/model/ipc/channels';
+import { IpcRequest } from '../shared/model/ipc/ipc-request';
 
 const { ipcRenderer } = window.require("electron");
 
 class ApiService {
-    public send<T>(channel: string, request: IpcRequest = {}): Promise<T> {
+    public send<T>(channel: Channel): Promise<T> {
         // If the ipcRenderer is not available try to initialize it
         if (!ipcRenderer) {
             throw new Error(`Unable to require renderer process`);
         }
-        // If there's no responseChannel let's auto-generate it
-        if (!request.responseChannel) {
-            request.responseChannel = `${channel}_response_${new Date().getTime()}`
-        }
-
-        console.log(channel, request);
+        const responseChannel = ChannelResponse[channel];
+        const request: IpcRequest = {
+            responseChannel,
+        };
         ipcRenderer.send(channel, request);
 
         return new Promise(resolve => {
-            ipcRenderer.once(request.responseChannel!, (event, response) => resolve(response));
+            ipcRenderer.once(responseChannel, (event, response) => resolve(response));
         });
     }
 }

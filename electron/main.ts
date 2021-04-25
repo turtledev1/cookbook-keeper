@@ -1,8 +1,8 @@
 import { app, BrowserWindow, ipcMain } from 'electron';
 import installExtension, { REACT_DEVELOPER_TOOLS, REDUX_DEVTOOLS } from "electron-devtools-installer";
 import * as isDev from 'electron-is-dev';
-import { LoadRecipesChannel } from './ipc/channels/load-recipes.channel';
-import { IpcChannel } from './ipc/ipc-channel';
+import { IpcChannel } from '../src/shared/model/ipc/ipc-channel';
+import { LoadRecipesChannel } from './ipc/load-recipes.channel';
 
 class Main {
     private mainWindow: BrowserWindow | null = null;
