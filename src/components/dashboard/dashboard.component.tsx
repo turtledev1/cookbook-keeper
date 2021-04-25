@@ -1,13 +1,18 @@
-import React, { FC } from 'react';
-import { useHistory } from 'react-router';
+import React, { FC, useState } from 'react';
+import { api } from '../../api/api.service';
 
 export const Dashboard: FC = () => {
-    const history = useHistory();
+    const [value, setValue] = useState('');
+
+    const onClick = async () => {
+        setValue(await (await api.send<{ kernel: string }>('load-recipes')).kernel);
+    };
 
     return (
         <>
             <div>Dashboard</div>
-            <button onClick={() => history.push('/recipes')}>test</button>
+            <button onClick={onClick}>Test</button>
+            {value}
         </>
     );
 }

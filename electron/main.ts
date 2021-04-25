@@ -1,46 +1,66 @@
-import { app, BrowserWindow } from 'electron';
+import { app, BrowserWindow, ipcMain } from 'electron';
 import installExtension, { REACT_DEVELOPER_TOOLS, REDUX_DEVTOOLS } from "electron-devtools-installer";
 import * as isDev from 'electron-is-dev';
+import { LoadRecipesChannel } from './ipc/channels/load-recipes.channel';
+import { IpcChannel } from './ipc/ipc-channel';
 
-let win: BrowserWindow | null = null;
+class Main {
+    private mainWindow: BrowserWindow | null = null;
 
-function createWindow() {
-    win = new BrowserWindow({
-        width: 1200,
-        height: 900,
-        webPreferences: {
-            nodeIntegration: true,
-            devTools: isDev,
-        }
-    })
+    public init(ipcChannels: IpcChannel[]) {
+        app.on('ready', this.createWindow);
+        app.on('window-all-closed', this.onWindowAllClosed);
+        app.on('activate', this.onActivate);
 
-    if (isDev) {
-        // DevTools
-        installExtension([REDUX_DEVTOOLS, REACT_DEVELOPER_TOOLS])
-            .then((name) => console.log(`Added Extension:  ${name}`))
-            .catch((err) => console.log('An error occurred: ', err));
-
-        win.loadURL('http://localhost:3000/index.html');
-    } else {
-        // 'build/index.html'
-        win.loadURL(`file://${__dirname}/../index.html`);
+        this.registerIpcChannels(ipcChannels);
     }
 
-    win.on('closed', () => {
-        win = null;
-    });
+    private onWindowAllClosed() {
+        if (process.platform !== 'darwin') {
+            app.quit();
+        }
+    }
+
+    private onActivate() {
+        if (!this.mainWindow) {
+            this.createWindow();
+        }
+    }
+
+    private createWindow() {
+        this.mainWindow = new BrowserWindow({
+            width: 1200,
+            height: 900,
+            webPreferences: {
+                nodeIntegration: true,
+                contextIsolation: false,
+                devTools: isDev,
+            }
+        })
+
+        if (isDev) {
+            // DevTools
+            installExtension([REDUX_DEVTOOLS, REACT_DEVELOPER_TOOLS])
+                .then((name) => console.log(`Added Extension:  ${name}`))
+                .catch((err) => console.log('An error occurred: ', err));
+
+            this.mainWindow.loadURL('http://localhost:3000/index.html');
+        } else {
+            // 'build/index.html'
+            this.mainWindow.setMenu(null);
+            this.mainWindow.loadURL(`file://${__dirname}/../index.html`);
+        }
+
+        this.mainWindow.on('closed', () => {
+            this.mainWindow = null;
+        });
+    }
+
+    private registerIpcChannels(ipcChannels: IpcChannel[]) {
+        ipcChannels.forEach(channel => ipcMain.on(channel.getName(), (event, request) => channel.handle(event, request)));
+    }
 }
 
-app.on('ready', createWindow);
-
-app.on('window-all-closed', () => {
-    if (process.platform !== 'darwin') {
-        app.quit();
-    }
-});
-
-app.on('activate', () => {
-    if (win === null) {
-        createWindow();
-    }
-});
+(new Main()).init([
+    new LoadRecipesChannel(),
+]);
