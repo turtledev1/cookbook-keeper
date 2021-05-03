@@ -1,3 +1,4 @@
+import { RecipeDTO } from '../shared/model/dto/recipeDTO';
 import { Channel, ChannelResponse } from '../shared/model/ipc/channels';
 import { IpcRequest } from '../shared/model/ipc/ipc-request';
 
@@ -18,6 +19,10 @@ class ApiService {
         return new Promise(resolve => {
             ipcRenderer.once(responseChannel, (event, response) => resolve(response));
         });
+    }
+
+    public loadRecipes(): Promise<{ recipes: RecipeDTO[] }> {
+        return api.send<{ recipes: RecipeDTO[] }>(Channel.LoadRecipes)
     }
 }
 
