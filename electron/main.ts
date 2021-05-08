@@ -29,8 +29,8 @@ class Main {
 
     private createWindow() {
         this.mainWindow = new BrowserWindow({
-            width: 1200,
-            height: 900,
+            width: 1280,
+            height: 720,
             webPreferences: {
                 nodeIntegration: true,
                 contextIsolation: false,
