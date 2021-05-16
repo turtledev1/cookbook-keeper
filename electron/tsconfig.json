@@ -13,6 +13,6 @@
     },
     "include": [
         ".",
-        "../src/shared"
+        "../src/model"
     ]
 }

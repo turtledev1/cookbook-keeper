@@ -1,7 +1,7 @@
 import { IpcMainEvent } from 'electron';
-import { Channel } from '../../src/shared/model/ipc/channels';
-import { IpcChannel } from '../../src/shared/model/ipc/ipc-channel';
-import { IpcRequest } from '../../src/shared/model/ipc/ipc-request';
+import { Channel } from '../../src/model/ipc/channels';
+import { IpcChannel } from '../../src/model/ipc/ipc-channel';
+import { IpcRequest } from '../../src/model/ipc/ipc-request';
 import { getUserDataPath } from '../app';
 import { isFileExist, readFile, writeFile } from '../file-manager';
 
@@ -18,6 +18,7 @@ export class LoadRecipesChannel implements IpcChannel {
                 "title": "Première recette",
                 "ingredients": ["1/2 tasse de truc", "Lots of other things"],
                 "steps": ["Coupe toute", "Cuit toute"],
+                "portions": 6,
                 "prepTime": 0.5,
                 "cookTime": 1,
                 "labels": [

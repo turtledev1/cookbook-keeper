@@ -1,11 +1,15 @@
-import { RecipeDTO } from '../shared/model/dto/recipeDTO';
-import { Channel, ChannelResponse } from '../shared/model/ipc/channels';
-import { IpcRequest } from '../shared/model/ipc/ipc-request';
+import { RecipeDTO } from '../model/dto/recipeDTO';
+import { Channel, ChannelResponse } from '../model/ipc/channels';
+import { IpcRequest } from '../model/ipc/ipc-request';
 
 const { ipcRenderer } = window.require("electron");
 
 class ApiService {
-    public send<T>(channel: Channel): Promise<T> {
+    public loadRecipes(): Promise<{ recipes: RecipeDTO[] }> {
+        return api.send<{ recipes: RecipeDTO[] }>(Channel.LoadRecipes)
+    }
+
+    private send<T>(channel: Channel): Promise<T> {
         // If the ipcRenderer is not available try to initialize it
         if (!ipcRenderer) {
             throw new Error(`Unable to require renderer process`);
@@ -19,10 +23,6 @@ class ApiService {
         return new Promise(resolve => {
             ipcRenderer.once(responseChannel, (event, response) => resolve(response));
         });
-    }
-
-    public loadRecipes(): Promise<{ recipes: RecipeDTO[] }> {
-        return api.send<{ recipes: RecipeDTO[] }>(Channel.LoadRecipes)
     }
 }
 
