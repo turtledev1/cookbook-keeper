@@ -14,14 +14,15 @@ export const Container: FC<ConnectedProps<typeof connector>> = ({
         loadRecipes();
     }, [loadRecipes]);
 
+    if (isLoading) {
+        return (
+            <div>Loading...</div>
+        );
+    }
+
     return (
         <>
             {
-                isLoading &&
-                <div>Loading...</div>
-            }
-            {
-                !isLoading &&
                 recipes.map(recipe => {
                     return (
                         <Recipe recipe={recipe} />
