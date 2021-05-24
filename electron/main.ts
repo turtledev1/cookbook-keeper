@@ -2,6 +2,7 @@ import { app, BrowserWindow, ipcMain } from 'electron';
 import installExtension, { REACT_DEVELOPER_TOOLS, REDUX_DEVTOOLS } from "electron-devtools-installer";
 import * as isDev from 'electron-is-dev';
 import { IpcChannel } from '../src/model/ipc/ipc-channel';
+import { CreateRecipeChannel } from './ipc/create-recipe.channel';
 import { LoadRecipesChannel } from './ipc/load-recipes.channel';
 
 class Main {
@@ -63,4 +64,5 @@ class Main {
 
 (new Main()).init([
     new LoadRecipesChannel(),
+    new CreateRecipeChannel(),
 ]);

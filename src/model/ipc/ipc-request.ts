@@ -1,5 +1,9 @@
+import { RecipeDTO } from '../dto/recipeDTO';
+
 export interface IpcRequest {
     responseChannel: string;
+}
 
-    params?: string[];
+export interface IpcCreateRecipeRequest extends IpcRequest {
+    recipe: RecipeDTO;
 }
