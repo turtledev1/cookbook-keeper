@@ -6,9 +6,24 @@
 }
 
 .content {
-  padding: 32px;
   border-radius: 20px;
   width: 100%;
   flex: 1;
   box-shadow: 0px 3px 14px #00000029;
+}
+
+.topSection {
+  padding: 32px;
+  background-color: #dedede33;
+  border-radius: 20px 20px 0px 0px;
+}
+
+.middleSection {
+  padding: 32px;
+}
+
+.bottomSection {
+  padding: 32px;
+  background-color: #dedede33;
+  border-radius: 0px 0px 20px 20px;
 }

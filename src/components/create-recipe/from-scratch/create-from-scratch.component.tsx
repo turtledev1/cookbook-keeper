@@ -2,6 +2,7 @@ import React, { FC } from 'react';
 import { v4 } from 'uuid';
 import { RecipeDTO } from '../../../model/dto/recipeDTO';
 import { Button } from '../../button/button.component';
+import { Input } from '../../input/input.component';
 import { SectionTitle } from '../../section-title/section-title.component';
 import styles from './create-from-scratch.module.css';
 
@@ -27,9 +28,19 @@ export const CreateFromScratch: FC<CreateFromScratchProps> = ({
         <div className={styles.container}>
             <SectionTitle title={'CRÉER UNE RECETTE'} />
             <div className={styles.content}>
-                <Button onClick={() => createRecipe(RECIPE)}>
-                    {'Test créer recette'}
-                </Button>
+                <div className={styles.topSection}>
+                    <Input label={'Nom de la recette'} />
+                </div>
+                <div className={styles.middleSection}>
+                    <Input label={'Nom de la recette'} />
+                </div>
+                <div className={styles.bottomSection}>
+                    <Input label={'Nom de la recette'} />
+
+                    <Button onClick={() => createRecipe(RECIPE)}>
+                        {'Prévisualiser'}
+                    </Button>
+                </div>
             </div>
         </div>
     );
