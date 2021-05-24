@@ -1,6 +1,7 @@
+import { v4 } from 'uuid';
 import { RecipeDTO } from '../../src/model/dto/recipeDTO';
 import { getUserDataPath } from '../app';
-import { appendFile, createDirectory, isPathExist, readFile, writeFile } from '../file-manager';
+import { createDirectory, isPathExist, readFile, writeFile } from '../file-manager';
 
 const DATA_FOLDER = `${getUserDataPath()}/data`;
 const RECIPES_FILE = `${DATA_FOLDER}/recipes.json`;
@@ -13,8 +14,9 @@ export function loadRecipes(): RecipeDTO[] {
 }
 
 export function saveRecipe(recipe: RecipeDTO): void {
-    createFileIfNotExist();
-    appendFile(RECIPES_FILE, JSON.stringify(recipe));
+    const recipes = loadRecipes();
+    recipes.push(recipe);
+    writeFile(RECIPES_FILE, JSON.stringify(recipes));
 }
 
 function createFileIfNotExist(): void {
@@ -24,6 +26,7 @@ function createFileIfNotExist(): void {
     if (!isPathExist(RECIPES_FILE)) {
         writeFile(RECIPES_FILE, JSON.stringify([
             {
+                "id": v4(),
                 "title": "Première recette",
                 "ingredients": ["1/2 tasse de truc", "Lots of other things"],
                 "steps": ["Coupe toute", "Cuit toute"],
@@ -39,6 +42,7 @@ function createFileIfNotExist(): void {
                 "createdTime": 1621178230679
             },
             {
+                "id": v4(),
                 "title": "Deuxième recette",
                 "ingredients": ["1/2 tasse de truc", "Lots of other things"],
                 "steps": ["Coupe toute", "Cuit toute"],

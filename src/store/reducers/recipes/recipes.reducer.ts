@@ -1,4 +1,5 @@
 import { AnyAction } from 'redux';
+import { CreateRecipeAction, CREATE_RECIPE } from '../../../actions/recipe/recipe.action';
 import { LoadRecipesCompletedAction, LOAD_RECIPES, LOAD_RECIPES_COMPLETED } from '../../../actions/recipes/recipes.action';
 import { RecipesStore } from '../../../model/store/recipes-store.model';
 
@@ -21,6 +22,14 @@ export const recipes = function (state = INITIAL_STATE, action: AnyAction): Reci
             return {
                 recipes: typedAction.recipes,
                 isLoading: false,
+            }
+        }
+        case CREATE_RECIPE: {
+            const typedAction = action as CreateRecipeAction;
+
+            return {
+                ...state,
+                recipes: [...state.recipes, typedAction.recipe],
             }
         }
         default:

@@ -1,11 +1,22 @@
 import React, { FC } from 'react';
 import styles from './button.module.css';
 
-export const Button: FC = ({
+export interface ButtonProps {
+    onClick?: () => void;
+    disabled?: boolean;
+}
+
+export const Button: FC<ButtonProps> = ({
+    onClick = () => {},
+    disabled = false,
     children,
 }) => {
     return (
-        <button className={styles.button}>
+        <button
+            onClick={onClick}
+            className={styles.button}
+            disabled={disabled}
+        >
             {children}
         </button>
     );

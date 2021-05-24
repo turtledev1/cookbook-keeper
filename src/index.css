@@ -1,17 +1,64 @@
-html,
-body {
-  height: 100%;
-  width: 100%;
+@font-face {
+    font-family: "Ubuntu-Light";
+    src: local("Ubuntu-Light"), url(./fonts/Ubuntu-Light.ttf) format("truetype");
 }
 
+@font-face {
+    font-family: "Ubuntu-LightItalic";
+    src: local("Ubuntu-LightItalic"), url(./fonts/Ubuntu-LightItalic.ttf) format("truetype");
+}
+
+@font-face {
+    font-family: "Ubuntu";
+    src: local("Ubuntu"), url(./fonts/Ubuntu-Regular.ttf) format("truetype");
+}
+
+@font-face {
+    font-family: "Ubuntu-Italic";
+    src: local("Ubuntu-Italic"), url(./fonts/Ubuntu-Italic.ttf) format("truetype");
+}
+
+@font-face {
+    font-family: "Ubuntu-Medium";
+    src: local("Ubuntu-Medium"), url(./fonts/Ubuntu-Medium.ttf) format("truetype");
+}
+
+@font-face {
+    font-family: "Ubuntu-MediumItalic";
+    src: local("Ubuntu-MediumItalic"), url(./fonts/Ubuntu-MediumItalic.ttf) format("truetype");
+}
+
+@font-face {
+    font-family: "Ubuntu-Bold";
+    src: local("Ubuntu-Bold"), url(./fonts/Ubuntu-Bold.ttf) format("truetype");
+}
+
+@font-face {
+    font-family: "Ubuntu-BoldItalic";
+    src: local("Ubuntu-BoldItalic"), url(./fonts/Ubuntu-BoldItalic.ttf) format("truetype");
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html,
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
-    "Droid Sans", "Helvetica Neue", sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+    height: 100%;
+}
+
+html,
+body,
+input,
+textarea,
+button {
+    margin: 0;
+    font-family: "Ubuntu-Medium", "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+    color: #7c7c7c;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+    font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
